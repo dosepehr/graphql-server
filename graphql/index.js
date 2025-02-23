@@ -1,4 +1,9 @@
-const { GraphQLObjectType, GraphQLSchema, GraphQLList } = require('graphql');
+const {
+    GraphQLObjectType,
+    GraphQLSchema,
+    GraphQLList,
+    GraphQLString,
+} = require('graphql');
 const CourseType = require('./courseType');
 const TeacherType = require('./teacherType');
 
@@ -39,6 +44,15 @@ const RootQuery = new GraphQLObjectType({
             type: new GraphQLList(TeacherType),
             resolve: () => {
                 return teachers;
+            },
+        },
+        course: {
+            type: TeacherType,
+            args: {
+                id: { type: GraphQLString },
+            },
+            resolve: (obj, { id }) => {
+                return teachers[+id];
             },
         },
     },
