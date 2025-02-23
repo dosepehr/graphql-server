@@ -37,8 +37,8 @@ const RootQuery = new GraphQLObjectType({
     },
 });
 
-const courseSchema = new GraphQLSchema({
+const graphqlSchema = new GraphQLSchema({
     query: RootQuery,
 });
 
-module.exports = courseSchema;
+module.exports = graphqlSchema;
