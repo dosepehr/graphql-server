@@ -5,20 +5,21 @@ const {
     GraphQLString,
 } = require('graphql');
 const CourseType = require('./courseType');
-const TeacherType = require('./teacherType');
+const TeacherType = require('../modules/Teacher/teacherType');
+const mongoDBInit = require('../utils/mongo');
 
 const courses = [
     {
         id: 1,
         title: 'js',
         price: 10,
-        teacherId:'1'
+        teacherId: '1',
     },
     {
         id: 1,
         title: 'ts',
         price: 20,
-        teacherId:'2'
+        teacherId: '2',
     },
 ];
 const teachers = [
@@ -33,6 +34,9 @@ const teachers = [
         age: 20,
     },
 ];
+
+mongoDBInit();
+
 const RootQuery = new GraphQLObjectType({
     name: 'RootQuery',
     fields: {

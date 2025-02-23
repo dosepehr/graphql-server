@@ -1,5 +1,5 @@
 const { GraphQLObjectType, GraphQLString } = require('graphql');
-const TeacherType = require('./teacherType');
+const TeacherType = require('../modules/Teacher/teacherType');
 
 const CourseType = new GraphQLObjectType({
     name: 'Course',
