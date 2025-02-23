@@ -15,17 +15,12 @@ exports.deleteOne = (Model) => {
     });
 };
 
-exports.addOne = (Model, validation) => {
-    return expressAsyncHandler(async (req, res, next) => {
-        if (validation) {
-            await validation.validate(req.body);
-        }
-        await Model.create(req.body);
-        res.status(201).json({
-            status: true,
-            message: 'created',
-        });
-    });
+exports.addOne = async (Model, args, validation) => {
+    if (validation) {
+        await validation.validate(args);
+    }
+
+    return await Model.create(args);
 };
 
 exports.updateOne = (Model, validation) => {

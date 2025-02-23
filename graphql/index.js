@@ -4,11 +4,12 @@ const {
     GraphQLList,
     GraphQLString,
     GraphQLInt,
+    GraphQLID,
 } = require('graphql');
 const CourseType = require('../modules/Course/courseType');
 const TeacherType = require('../modules/Teacher/teacherType');
 const Teacher = require('../modules/Teacher/teacherModel');
-
+const { addOne } = require('../modules/Factory/factoryController');
 const courses = [
     {
         id: 1,
@@ -73,13 +74,23 @@ const RootMutation = new GraphQLObjectType({
             },
             resolve: async (obj, args) => {
                 const { name, age } = args;
-                const teacher = { name, age };
-                return await Teacher.create(teacher);
+                return addOne(Teacher, { name, age });
             },
         },
 
         addCourse: {
-            // Data
+            type: CourseType,
+            args: {
+                title: {
+                    type: GraphQLString,
+                },
+                price: {
+                    type: GraphQLString,
+                },
+                teacher: {
+                    type: GraphQLID,
+                },
+            },
         },
     },
 });
