@@ -1,4 +1,5 @@
 const { GraphQLObjectType, GraphQLString } = require('graphql');
+const TeacherType = require('./teacherType');
 
 const CourseType = new GraphQLObjectType({
     name: 'Course',
@@ -6,6 +7,19 @@ const CourseType = new GraphQLObjectType({
         id: { type: GraphQLString },
         title: { type: GraphQLString },
         price: { type: GraphQLString },
+        teacher: {
+            type: TeacherType,
+            resolve: (source) => {
+                const teacher = [
+                    {
+                        id: 1,
+                        name: 'Sepehr',
+                        age: 10,
+                    },
+                ];
+                return teacher;
+            },
+        },
     }),
 });
 

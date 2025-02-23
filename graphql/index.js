@@ -12,22 +12,24 @@ const courses = [
         id: 1,
         title: 'js',
         price: 10,
+        teacherId:'1'
     },
     {
         id: 1,
         title: 'ts',
         price: 20,
+        teacherId:'2'
     },
 ];
 const teachers = [
     {
         id: 1,
-        name: 'js',
+        name: 'Amin',
         age: 10,
     },
     {
         id: 1,
-        name: 'ts',
+        name: 'sepehr',
         age: 20,
     },
 ];
