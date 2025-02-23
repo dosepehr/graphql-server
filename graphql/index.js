@@ -1,18 +1,7 @@
-const {
-    GraphQLObjectType,
-    GraphQLString,
-    GraphQLSchema,
-    GraphQLList,
-} = require('graphql');
+const { GraphQLObjectType, GraphQLSchema, GraphQLList } = require('graphql');
+const CourseType = require('./courseType');
+const TeacherType = require('./teacherType');
 
-const CourseType = new GraphQLObjectType({
-    name: 'Course',
-    fields: () => ({
-        id: { type: GraphQLString },
-        title: { type: GraphQLString },
-        price: { type: GraphQLString },
-    }),
-});
 const courses = [
     {
         id: 1,
@@ -25,6 +14,18 @@ const courses = [
         price: 20,
     },
 ];
+const teachers = [
+    {
+        id: 1,
+        name: 'js',
+        age: 10,
+    },
+    {
+        id: 1,
+        name: 'ts',
+        age: 20,
+    },
+];
 const RootQuery = new GraphQLObjectType({
     name: 'RootQuery',
     fields: {
@@ -32,6 +33,12 @@ const RootQuery = new GraphQLObjectType({
             type: new GraphQLList(CourseType),
             resolve: () => {
                 return courses;
+            },
+        },
+        teachers: {
+            type: new GraphQLList(TeacherType),
+            resolve: () => {
+                return teachers;
             },
         },
     },
