@@ -5,9 +5,8 @@ const {
     GraphQLString,
     GraphQLInt,
 } = require('graphql');
-const CourseType = require('./courseType');
+const CourseType = require('../modules/Course/courseType');
 const TeacherType = require('../modules/Teacher/teacherType');
-const mongoDBInit = require('../utils/mongo');
 const Teacher = require('../modules/Teacher/teacherModel');
 
 const courses = [
@@ -36,8 +35,6 @@ const teachers = [
         age: 20,
     },
 ];
-
-mongoDBInit();
 
 const RootQuery = new GraphQLObjectType({
     name: 'RootQuery',
