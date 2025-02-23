@@ -3,10 +3,12 @@ const {
     GraphQLSchema,
     GraphQLList,
     GraphQLString,
+    GraphQLInt,
 } = require('graphql');
 const CourseType = require('./courseType');
 const TeacherType = require('../modules/Teacher/teacherType');
 const mongoDBInit = require('../utils/mongo');
+const Teacher = require('../modules/Teacher/teacherModel');
 
 const courses = [
     {
@@ -63,9 +65,30 @@ const RootQuery = new GraphQLObjectType({
         },
     },
 });
+const RootMutation = new GraphQLObjectType({
+    name: 'RootMutation',
+    fields: {
+        addTeacher: {
+            type: TeacherType,
+            args: {
+                name: { type: GraphQLString },
+                age: { type: GraphQLInt },
+            },
+            resolve: async (obj, args) => {
+                const { name, age } = args;
+                const teacher = { name, age };
+                return await Teacher.create(teacher);
+            },
+        },
 
+        addCourse: {
+            // Data
+        },
+    },
+});
 const graphqlSchema = new GraphQLSchema({
     query: RootQuery,
+    mutation: RootMutation,
 });
 
 module.exports = graphqlSchema;
