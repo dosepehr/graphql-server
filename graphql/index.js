@@ -5,6 +5,7 @@ const {
     GraphQLString,
     GraphQLInt,
     GraphQLID,
+    GraphQLNonNull,
 } = require('graphql');
 const CourseType = require('../modules/Course/courseType');
 const TeacherType = require('../modules/Teacher/teacherType');
@@ -44,8 +45,8 @@ const RootMutation = new GraphQLObjectType({
         addTeacher: {
             type: TeacherType,
             args: {
-                name: { type: GraphQLString },
-                age: { type: GraphQLInt },
+                name: { type: GraphQLNonNull(GraphQLString) },
+                age: { type: GraphQLNonNull(GraphQLInt) },
             },
             resolve: async (obj, args) => {
                 const { name, age } = args;
