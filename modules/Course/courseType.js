@@ -1,5 +1,6 @@
 const { GraphQLObjectType, GraphQLString } = require('graphql');
 const TeacherType = require('../Teacher/teacherType');
+const Teacher = require('../Teacher/teacherModel');
 
 const CourseType = new GraphQLObjectType({
     name: 'Course',
@@ -9,14 +10,8 @@ const CourseType = new GraphQLObjectType({
         price: { type: GraphQLString },
         teacher: {
             type: TeacherType,
-            resolve: (source) => {
-                const teacher = [
-                    {
-                        id: 1,
-                        name: 'Sepehr',
-                        age: 10,
-                    },
-                ];
+            resolve: async (source) => {
+                const teacher = await Teacher.findOne({ _id: source.teacher });
                 return teacher;
             },
         },
