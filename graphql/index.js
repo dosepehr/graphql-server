@@ -9,6 +9,7 @@ const {
 const CourseType = require('../modules/Course/courseType');
 const TeacherType = require('../modules/Teacher/teacherType');
 const Teacher = require('../modules/Teacher/teacherModel');
+const Course = require('../modules/Course/courseModel');
 const { addOne } = require('../modules/Factory/factoryController');
 const courses = [
     {
@@ -90,6 +91,10 @@ const RootMutation = new GraphQLObjectType({
                 teacher: {
                     type: GraphQLID,
                 },
+            },
+            resolve: async (obj, args) => {
+                const { title, price, teacher } = args;
+                return addOne(Course, { title, price, teacher });
             },
         },
     },
